@@ -1,0 +1,116 @@
+CREATE TABLE bill(
+    	bill_no INTEGER NOT NULL,
+	pid INTEGER,
+	lab_charge DECIMAL,
+	patienmt_type VARCHAR(20),
+	visitid INTEGER,
+	bill_style VARCHAR(20), 
+	bill DECIMAL,
+	doctor_charge DECIMAL,
+	advance DECIMAL,
+	health_care TEXT,
+	nursing_charge DECIMAL,
+	no_of_days INTEGER,
+	operation_charge DECIMAL,
+	room_charge DECIMAL,
+	medicine_charge DECIMAL,	
+		CONSTRAINT pk_9bill_no PRIMARY KEY (bill_no),
+		CONSTRAINT fk_11ypid FOREIGN KEY (pid)
+			REFERENCES patient (pid),
+		CONSTRAINT fk_visitid22 FOREIGN KEY (visitid)
+			REFERENCES visit (visitid)
+);
+	
+CREATE TABLE patient(
+	pid INTEGER NOT NULL,
+	name TEXT,
+	gender VARCHAR(10),
+	age INTEGER,
+	weight DECIMAL,
+	doctorid INTERGER,
+	disease TEXT,
+	phone INTEGER,
+	address_1 TEXT,
+	address_2 TEXT,
+	address_3 TEXT,
+		CONSTRAINT pk_1231pid PRIMARY KEY (pid),
+		CONSTRAINT fk_22d44octorid FOREIGN KEY (doctorid)
+			REFERENCES doctor (doctorid)
+);
+			
+
+CREATE TABLE doctor(
+	doctorid INTEGER NOT NULL,
+	doctor_name TEXT,
+	dept TEXT,
+		CONSTRAINT pk_21r12rdoctorid PRIMARY KEY (doctorid)
+);
+		
+CREATE TABLE visit(
+	visitid INTEGER NOT NULL,
+	pid INTEGER,
+	doctorid INTEGER,
+		CONSTRAINT pk_12241visitid PRIMARY KEY (visitid),
+		CONSTRAINT fk_1223doctorid FOREIGN KEY (doctorid)
+			REFERENCES doctor (doctorid),
+		CONSTRAINT fk_144KEY FOREIGN KEY (pid)
+			REFERENCES bill (pid)
+);
+			
+			
+CREATE TABLE appointment(
+	appointmentid INTEGER NOT NULL,
+	pid INTEGER,
+	doctorid INTEGER,
+		CONSTRAINT pk_113appointmentid PRIMARY KEY (appointmentid),
+		CONSTRAINT fk_1doctorid FOREIGN KEY (doctorid)
+			REFERENCES doctor (doctorid),
+		CONSTRAINT fk_212223pid FOREIGN KEY (pid)
+			REFERENCES bill (pid)
+);
+	
+CREATE TABLE inpatient(
+	pid INTEGER NOT NULL,
+	lab_no INTEGER,
+	room_no INTEGER,
+	advance DECIMAL,
+	date_of_admission DATE,
+	date_of_discharge DATE,	
+		CONSTRAINT pk_123pid PRIMARY KEY (pid, lab_no),
+		CONSTRAINT fk_2153doctorid FOREIGN KEY (doctorid)
+			REFERENCES doctor (doctorid),
+	    	CONSTRAINT fk_2113lab_no FOREIGN KEY (lab_no)
+			REFERENCES lab_report (lab_no)
+	
+);
+
+CREATE TABLE outpatient(
+	pid INTEGER NOT NULL,
+	lab_no INTEGER,
+	date DATE,
+		CONSTRAINT pk_1room_no PRIMARY KEY (room_no, lab_no),
+		CONSTRAINT fk_213lab_no FOREIGN KEY (lab_no)
+			REFERENCES lab_report (lab_no)
+);
+			
+CREATE TABLE room(
+	room_no INTEGER NOT NULL,
+	room_type TEXT,
+	status TEXT,
+		CONSTRAINT pk_213room_no PRIMARY KEY (room_no)
+);
+
+CREATE TABLE lab_report(
+	lab_no INTEGER NOT NULL,
+	pid INTEGER,
+	weight DECIMAL,
+	doctorid INTEGER,
+	date DATE,
+	category text,
+	amount INTEGER,
+		CONSTRAINT pk_2113lab_no PRIMARY KEY (lab_no),
+		CONSTRAINT fk_2134doctorid FOREIGN KEY (doctorid)
+			REFERENCES doctor (doctorid),
+	  	  CONSTRAINT fk_213pid FOREIGN KEY (pid)
+			REFERENCES patient (pid)
+);
