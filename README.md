@@ -35,27 +35,30 @@ ipynb可用 colab開  https://colab.research.google.com/notebooks/welcome.ipynb?
   4. UPDATE DATA (keywords) & INSERT DATA TO DATABASE
 
 TABLE 1:
-CREATE TABLE user_profile (
-        id PRIMARY KEY NOT NULL,
-        name VARCHAR(100), 
-        location VARCHAR(100),
-        description TEXT,
-        url (可有可無) TEXT,
-        protected(* private/ public?) boolean,
-        followers INTEGER,
-        friends_count,
-        created_at TIMESTAMP(* 不肯定),
-        FAVORITE_COUNT INTEGER,
-        verified boolean,
-        statuses_count INTEGER);
+# CREATE TABLE user_profile (
+   # id PRIMARY KEY NOT NULL,
+   # name VARCHAR(100), 
+   # screen_name VARCHAR(100),
+   # location VARCHAR(100),
+   # description TEXT,
+   # url (可有可無) TEXT,
+   # protected(* private/ public?) boolean,
+   # followers_count INTEGER,
+   # friends_count INTEGER,
+   # listed_count INTEGER,
+   # created_at TIMESTAMP(要搞埋時區),
+   # favourites_count INTEGER,
+   # geo_enabled boolean
+   # verified boolean,
+   # statuses_count INTEGER);
         
         
 table 2
 CREATE TABLE received_tweets (
-        created_at TIMESTAMP,
-        tweet_content (text) TEXT,
-        tweet_form (name) VARCHAR(100),
-        protected boolean,
-        followers_count INTEGER,
-        friends_count INTEGER,
+   # created_at TIMESTAMP,
+   # tweet_content (text) TEXT,
+   # tweet_form (name) VARCHAR(100),
+   # protected boolean,
+   # followers_count INTEGER,
+   # friends_count INTEGER,
         
