@@ -27,9 +27,35 @@ ipynb可用 colab開  https://colab.research.google.com/notebooks/welcome.ipynb?
 
 ## Phase 2: To SQL (SQLite: 
   1. Create & Design database
-      - Table 1: User Profile                         - INSERT + UPDATE
-      - Table 2: Tweets Table                         - INSERT + UPDATE or (ON CONFLICTS, DO NOTHING)
+      - Table 1: user_profile                         - INSERT + UPDATE
+      - Table 2: received_tweets                         - INSERT + UPDATE or (ON CONFLICTS, DO NOTHING)
       - Table 3: Specific Keyword Search              - INSERT + UPDATE or (ON CONFLICTS, DO NOTHING)
      
   3. INSERT DATA (keywords)  TO DATABASE &
   4. UPDATE DATA (keywords) & INSERT DATA TO DATABASE
+
+TABLE 1:
+CREATE TABLE user_profile (
+        id PRIMARY KEY NOT NULL,
+        name VARCHAR(100), 
+        location VARCHAR(100),
+        description TEXT,
+        url (可有可無) TEXT,
+        protected(* private/ public?) boolean,
+        followers INTEGER,
+        friends_count,
+        created_at TIMESTAMP(* 不肯定),
+        FAVORITE_COUNT INTEGER,
+        verified boolean,
+        statuses_count INTEGER);
+        
+        
+table 2
+CREATE TABLE received_tweets (
+        created_at TIMESTAMP,
+        tweet_content (text) TEXT,
+        tweet_form (name) VARCHAR(100),
+        protected boolean,
+        followers_count INTEGER,
+        friends_count INTEGER,
+        
