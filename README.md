@@ -10,7 +10,7 @@ ipynb可用 colab開  https://colab.research.google.com/notebooks/welcome.ipynb?
 # The purpose of this project:
 
 ## Phase 1:
-  1. Collect user's profile information from user -- JoeBiden   
+  1. Collect user's profile information from user -- JoeBiden, POTUS
             - user = api.get_user(screen_name = name)  
             
   2. Collect user's social network information from the Twitter user -- JoeBiden
