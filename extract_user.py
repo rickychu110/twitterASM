@@ -1,30 +1,48 @@
 import tweepy
 import json
+import sqlite3
+from table import *
+import pandas as pd
 
-# use username to search his info.
-def scrap_info(name, api):              
-    list_be_excluded = ["id_str", "entities", "geo", 
-                        "coor", "coordinates", "place", 
-                        "contributors", "status", "utc_offset",
-                        "time_zone", "following", "follow_request_sent",
-                        "notifications", "translator_type", "withheld_in_countries"]
-    user = api.get_user(screen_name = name)   
 
-    # change into a more reable and managable json data
-    json_str = json.dumps(user._json)  
-    profile_dict = json.loads(json_str)
+# use username to search his info. (Done!)
+def scrap_info(name, api):            
+    try:
+        list_be_excluded = ["id_str", "entities", "geo", 
+                            "coor", "coordinates", "place", 
+                            "contributors", "status", "utc_offset",
+                            "time_zone", "following", "follow_request_sent",
+                            "notifications", "translator_type", "withheld_in_countries",
+                            "contributors_enabled", "lang", "geo_enabled",
+                            "verified"]
+        user = api.get_user(screen_name = name)   
 
-    print(f"Profile information of {name} is:\n")
-    for key, value in profile_dict.items():      
-        if "profile_" in key:
-            continue
-        if key not in list_be_excluded:
-            print(f"{key}: {value}")
-    print("\n\n\n\n\n\n\n\n")
+        # change into a more reable and managable json data
+        str_ = json.dumps(user._json)
+        dict_= json.loads(str_)
+        for key, value in list(dict_.items()):
+            if key in list_be_excluded or "profile" in key:
+                dict_.pop(key)
 
+            elif key.startswith("profile_") or key.startswith("is"):
+                dict_.pop(key)
+
+        df = pd.DataFrame.from_dict([dict_]) 
+        df.to_csv ("C:\\Users\\123\Desktop\\twitterASM-kcwu\\data.csv", index = False, header=True)
+
+
+        conn = sqlite3.connect("C:\\Users\\123\Desktop\\twitterASM-kcwu\\project_database") # change to 'sqlite:///your_filename.db'
+        cur = conn.cursor()
+        cur.execute(table1) # use your column names here
+        df = pd.read_csv("C:\\Users\\123\Desktop\\twitterASM-kcwu\\data.csv")
+        df.to_sql("profile", conn, if_exists='append', index=False)
+
+    except sqlite3.IntegrityError as e:
+        print("You have that data already, please go to check your data base!!!")
+     
 
 #  using username to search his tweets
-def scrap_tweet(name,api):
+def scrap_tweet(name, api):
 
     tweets = api.user_timeline(screen_name=name, count=2,
                                include_rts = False, tweet_mode = 'extended')

@@ -2,6 +2,7 @@ import tweepy                         # Twitter API
 from per_confidential import *        # Saving Token, Keys
 from extract_user import *            # Functions being import to use (Phase 1)
 from keyword_search import *          # Functions being import to use (Phase 1)
+import sqlite3
 
 
 # Ask for authorization
@@ -32,9 +33,8 @@ def main():
         if  mode == "1":
             try:
                 name = input("Give me username, and get the data.\t").lower()
-                #scrap_info(name, api)   
+                # scrap_info(name, api)   
                 scrap_tweet(name, api)
-                #frd_list(name, api)
 
             except NameError as e:
                 print("Incorrect username!! Try again later.")
