@@ -39,15 +39,16 @@ for info in tweets[:3]:
     print(info.full_text)
     print("\n")
 
-#下面未用到啦
+
 all_tweets = []
 all_tweets.extend(tweets)
-outputtweets=[[tweets.id_str, 
-              tweets.created_at, 
-              tweets.favorite_count, 
-              tweets.retweet_count, 
-              tweets.full_text.encode("utf-8").decode("utf-8")] 
-             for idx,tweet in enumerate(all_tweets)]
+#tweets.full_text.encode("utf-8")
+outputtweets=[[tweets.id,
+            tweets.created_at, 
+            tweets.favorite_count, 
+            tweets.retweet_count, 
+            tweets.full_text.encode("utf-8").decode("utf-8")] 
+             for idx,tweets in enumerate(all_tweets)]
 df = pd.DataFrame(outputtweets,columns=["id","created_at","favorite_count","retweet_count", "text"])
 df.to_csv('%s_tweets.csv' % "JoeBiden",index=False)
 df.head(3)
