@@ -39,6 +39,7 @@ for info in tweets[:3]:
     print(info.full_text)
     print("\n")
 
+#下面未用到啦
 all_tweets = []
 all_tweets.extend(tweets)
 outputtweets=[[tweets.id_str, 
