@@ -51,4 +51,4 @@ outputtweets=[[tweets.id,
              for idx,tweets in enumerate(all_tweets)]
 df = pd.DataFrame(outputtweets,columns=["id","created_at","favorite_count","retweet_count", "text"])
 df.to_csv('%s_tweets.csv' % "JoeBiden",index=False)
-df.head(3)
+print(df.head(3))
