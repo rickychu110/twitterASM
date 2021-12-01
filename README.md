@@ -2,7 +2,7 @@
 Twitter Crawler & SQL transformer 
 outlook email
 #### ID:genrickylearn2021@outlook.com
-#### PW:Genhk1234
+#### PW:***
 
 ## Project Briefing and Team Formation
   #### 1.Jacky Cheung
